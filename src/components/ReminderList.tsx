@@ -3,7 +3,7 @@ import Reminder from "../model/reminder";
 
 interface ReminderListProps {
   items: Reminder[];
-  onRemoveReminder: (id: number) => boolean;
+  onRemoveReminder: (id: number) => void;
 }
 
 function ReminderList({ items, onRemoveReminder }: ReminderListProps) {

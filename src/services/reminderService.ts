@@ -1,8 +1,10 @@
 import axios from "axios";
 import Reminder from "../model/reminder";
 class ReminderService {
+  idNext: number = 203;
   remoteCall = axios.create({
-    baseURL: "http://jsonplaceholder.typicode.com/",
+    //baseURL: "http://jsonplaceholder.typicode.com/",
+    baseURL: "http://a.b:3001/",
   });
 
   async getReminders() {
@@ -11,10 +13,16 @@ class ReminderService {
     return response.data;
   }
 
-  async addReminder(title: string) {
-    const response = await this.remoteCall.post("todos", { title: { title } });
-    console.log("response addReminder ", response);
-    return response.data;
+  async editReminder(title: string) {
+    const snd = {
+      title,
+    };
+    console.log("sndReminderEdit ", snd);
+    const response = await this.remoteCall.post<Reminder>("todos", snd);
+    const rtn = response.data;
+    console.log("response ReminderEdit ", response, "\nrtn", rtn);
+    return rtn;
+    //return ;
   }
 
   async removeReminder(id: number) {
